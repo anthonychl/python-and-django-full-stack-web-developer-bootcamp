@@ -1,0 +1,36 @@
+{% extends 'posts/post_base.html' %}
+
+{% block pre_post %}
+    <div class="col-md-4">
+        {% if request.user.is_authenticated %}
+            <div class="container">
+                <div class="content">
+                    <h2 class="title">Your Groups</h2>
+                    <ul>
+                        {% for member_group in user.user_groups.all %} <!-- we can use the related_name = user_groups, to access the GroupMember class > -->
+                            <li>
+                                <h4>
+                                <a href="{% url 'groups:single' slug=member_group.group.slug %}">
+                                        {{ member_group.group.name }}
+                                </a>
+                                </h4>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+        
+    </div>
+{% endblock %}
+
+{% block post_content %}
+<div class="col-md-8 list-group">
+    {% for post in post_list %}
+        <div class="list-group-item list-group-item-action list-group-item-light">
+                {% include "posts/_post.html" %}
+        </div>
+	{% endfor %}
+</div>
+{% endblock %}
+
