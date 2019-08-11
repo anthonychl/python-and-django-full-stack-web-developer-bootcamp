@@ -1,4 +1,0 @@
-django superuser
-username anthony
-password anthony
-email anthony@gmail.com
